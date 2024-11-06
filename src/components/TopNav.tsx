@@ -46,7 +46,7 @@ const TopNav = () => {
             </button>
           </div>
 
-          <div className="hidden md:flex flex-1 justify-start items-center flex-row-reverse text-right space-x-4 rtl:space-x-reverse">
+          <div className="hidden md:flex flex-1 justify-start items-center  text-right ">
             <Link href="https://sunflower-dev.com" className="text-[#56464d] px-3 py-2 text-lg font-medium hover:bg-[#56464d] hover:text-white h-full rounded-lg">
               صفحه اصلی
             </Link>
