@@ -3,6 +3,7 @@ import Slider from '@/components/Slider';
 import React from 'react';
 import AboutSection from '../components/AboutSection';
 import SkillCard from '../components/SkillCard';
+import { HiAcademicCap } from "react-icons/hi";
 
 const page = () => {
   return (
@@ -11,7 +12,14 @@ const page = () => {
      <Slider/>  
      <AboutSection />
       <section id="skill" className="pb-5  md:m-24">
-      <h2 className="font-bold text-2xl mb-4">مهارتهای من</h2>
+
+      <h2 className="font-bold text-4xl text-[#56544d] mx-auto text-center mt-14">مهارتهای من</h2>
+ <div className="flex justify-center items-center">
+ <span className="before:block before:w-14 before:h-1 before:bg-[#56544d] mt-5"></span>
+
+<HiAcademicCap className='text-4xl text-[#56544d]  text-center mt-4 '/>
+<span className="after:block after:w-14 after:h-1 after:bg-[#56544d] mt-5"></span>
+ </div>
         <div className="flex flex-wrap justify-center">
           
           <SkillCard
@@ -36,49 +44,49 @@ const page = () => {
               title="REACT"
               description="دوره react .js را ابتدا از طریق وب سایتها و سپس از طریق شرکت در کلاسهای آنلاین مهندس محسن درم بخت و حسام موسوی گذرانده و همچنین برای ارتقا بیشتر در بوتکمپ فرانت پیشرفته دیجینکست شرکت کردم."  
               imgSrc="/images/skill/react.jpeg"
-              proficiency="90%"
+              proficiency="75%"
             />
             <SkillCard
               title="NEXT.JS"
               description="دوره next .js را ابتدا از طریق وب سایتها و سپس از طریق شرکت در کلاسهای آنلاین مهندس محسن درم بخت و حسام موسوی گذرانده و همچنین برای ارتقا بیشتر در بوتکمپ فرانت پیشرفته دیجینکست شرکت کردم."  
               imgSrc="/images/skill/nextjs.jpeg"
-              proficiency="90%"
+              proficiency="75%"
             />
            <SkillCard
               title="REDUX"
               description="دوره redux را ابتدا از طریق وب سایتها و سپس از طریق شرکت در کلاسهای آنلاین مهندس محسن درم بخت و حسام موسوی گذرانده و همچنین برای ارتقا بیشتر در بوتکمپ فرانت پیشرفته دیجینکست شرکت کردم."
               imgSrc="/images/skill/redux.jpeg"
-              proficiency="90%"
+              proficiency="75%"
             />
             <SkillCard
               title="JAVASCRIPT"
               description="دوره javascript را ابتدا از طریق وب سایتها و سپس از طریق شرکت در کلاسهای آنلاین مهندس حسام موسوی گذرانده و همچنین برای ارتقا بیشتر در بوتکمپ فرانت پیشرفته دیجینکست شرکت کردم."   
               imgSrc="/images/skill/javascript.jpeg"
-              proficiency="90%"
+              proficiency="70%"
             />
             <SkillCard
               title="TYPESCRIPT"
               description="دوره typescript را ابتدا از طریق وب سایتها و سپس از طریق شرکت در کلاسهای آنلاین مهندس حسام موسوی گذرانده و همچنین برای ارتقا بیشتر در بوتکمپ فرانت پیشرفته دیجینکست شرکت کردم." 
               imgSrc="/images/skill/typescript.jpeg"
-              proficiency="90%"
+              proficiency="80%"
             />
             <SkillCard
               title="PHP"
-              description="همزمان با دوره html , css در شعبه غرب مجتمع فنی تهران در دوره php نیز شرکت کرده و گواهی پایان دوره را نیز دریافت کردم ولی علاقه بیشتر من به قسمت فرانت وب سایت میباشد و علاقه زیادی به بک اند سایت ندارم." 
+              description="همزمان با دوره html , css در شعبه غرب مجتمع فنی تهران در دوره php نیز شرکت کرده و گواهی پایان دوره را نیز دریافت کردم ولی علاقه بیشتر من به قسمت فرانت وب سایت میباشد ." 
               imgSrc="/images/skill/php.jpeg"
-              proficiency="90%"
+              proficiency="50%"
             />
             <SkillCard
               title="API"
               description="در ابتدا برای یادگیری از طریق وب سایتها و فیلمهای یوتیوب سعی در ارتقا دانش خود داشتم، تا اینکه تجربه کار بهتر و اصولی را در کلاسهای دیجینکست بدست آوردم." 
               imgSrc="/images/skill/restapi.jpeg"
-              proficiency="90%"
+              proficiency="75%"
             />
             <SkillCard
               title="GITHUB"
               description="برای ارتقا برنامه نویسی و اهمیت گیت هاب سعی در یادگیری و توسعه خود داشتم و از طریق فیلم های یوتیوب توانستم به دانش خوبی در این زمینه برسم."
               imgSrc="/images/skill/github.jpeg"
-              proficiency="90%"
+              proficiency="75%"
             />
             <SkillCard
               title="SCRUM"
@@ -88,7 +96,7 @@ const page = () => {
             />
             <SkillCard
               title="UI/UX"
-              description="نقش مهمی که این زمینه در طراحی سایت دارد سبب شد تا در کلاسهای مجتمع فنی تهران شرکت کنم تا درک بهتری از این موضوع و کار با نرم افزارهای xd - figma را یادبگیرم ." 
+              description="نقش  که این زمینه در طراحی سایت دارد سبب شد تا در کلاسهای مجتمع فنی تهران شرکت کنم تا درک بهتری از این موضوع و کار با نرم افزارهای xd - figma را یادبگیرم ." 
               imgSrc="/images/skill/ui.jpeg"
               proficiency="90%"
             />
@@ -102,7 +110,7 @@ const page = () => {
               title="Campaign Advertising"
               description="این دوره را جهت علاقه شخصی خودم و آشنایی بیشتر در خصوص انواع تبلیغات و چگونگی پیاده سازی یک تبلیغ 360 درجه را در دانشگاه تهران شرکت کردم ." 
               imgSrc="/images/skill/campainadvertising.jpeg"
-              proficiency="70%"
+              proficiency="85%"
             />
             
 
