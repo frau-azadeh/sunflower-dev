@@ -7,6 +7,7 @@ import ScrollToTopButton from '../components/ScrollToTopButton';
 import { HiAcademicCap } from "react-icons/hi";
 import Footer from "../components/Footer";
 import NavigationMenu from "../components/NavigationMenu";
+import BackButton from "../components/BackButton";
 
 const page = () => {
   return (
@@ -120,6 +121,7 @@ const page = () => {
 
           </div>
       </section>
+      <BackButton />
       <NavigationMenu />
       <Footer/>
     </div>
