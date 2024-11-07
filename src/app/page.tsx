@@ -3,13 +3,17 @@ import Slider from '@/components/Slider';
 import React from 'react';
 import AboutSection from '../components/AboutSection';
 import SkillCard from '../components/SkillCard';
+import ScrollToTopButton from '../components/ScrollToTopButton';
 import { HiAcademicCap } from "react-icons/hi";
+import Footer from "../components/Footer";
+import NavigationMenu from "../components/NavigationMenu";
 
 const page = () => {
   return (
     <div className='bg-[#fff8e1] min-h-screen'>
       <TopNav/>
      <Slider/>  
+     <ScrollToTopButton/>
      <AboutSection />
       <section id="skill" className="pb-5  md:m-24">
 
@@ -116,6 +120,8 @@ const page = () => {
 
           </div>
       </section>
+      <NavigationMenu />
+      <Footer/>
     </div>
   )
 }

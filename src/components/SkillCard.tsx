@@ -10,7 +10,7 @@ interface SkillCardProps {
 
 const SkillCard: React.FC<SkillCardProps> = ({ title, description, imgSrc, proficiency }) => {
   return (
-    <div className="w-full sm:w-1/2 md:w-1/3 p-6"> 
+    <div className="w-full  md:w-1/3 p-6"> 
       <div className="bg-white leading-10 p-4 text-right text-[#56544d] hover:bg-gradient-to-b from-white to-[#56464d] hover:text-white rounded-lg drop-shadow-lg shadow-[#56464d] border-t-8 border-[#56464d]">
         <div className="icon-wrapper mb-4">
           <Image src={imgSrc} alt={title} width={50} height={50} className="mx-auto rounded-lg" />
