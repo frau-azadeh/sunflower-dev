@@ -1,6 +1,12 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+"use client"
 import ArticleLayout from '@/components/ArticleLayout';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import Footer from '@/components/Footer';
+import BackButton from '@/components/BackButton';
+import NavigationMenu from '@/components/NavigationMenu';
+import ScrollToTopButton from '@/components/ScrollToTopButton';
+import TopNav from '@/components/TopNav';
 
 interface ArticleData {
   title: string;
@@ -15,8 +21,9 @@ interface ArticleData {
 }
 
 export default function ArticlePage() {
-  const router = useRouter();
-  const { category, slug } = router.query;
+  const params = useParams();
+  const slug = params?.slug as string | undefined;
+  const category = params?.category as string | undefined;
 
   const [articles, setArticles] = useState<ArticleData[]>([]);
   const [article, setArticle] = useState<ArticleData | null>(null);
@@ -31,7 +38,7 @@ export default function ArticlePage() {
         );
         const data = await response.json();
 
-        setArticles(data.articles); // فرض کنید JSON دارای آرایه‌ای از مقالات به نام "articles" باشد
+        setArticles(data.articles); 
       } catch (error) {
         console.error("Error fetching articles:", error);
       } finally {
@@ -43,10 +50,9 @@ export default function ArticlePage() {
 
   useEffect(() => {
     if (category && slug && articles.length > 0) {
-      // فیلتر کردن مقاله مورد نظر بر اساس category و slug
       const foundArticle = articles.find(
         (article) =>
-          article.category.toLowerCase() === category.toString().toLowerCase() &&
+          article.category.toLowerCase() === category.toLowerCase() &&
           article.slug === slug
       );
       setArticle(foundArticle || null);
@@ -58,18 +64,26 @@ export default function ArticlePage() {
   }
 
   if (!article) {
-    return <div>مقاله یافت نشد.</div>;
+    return <div>...</div>;
   }
 
   return (
-    <ArticleLayout
-      title={article.title}
-      description={article.description}
-      date={article.date}
-      author={article.author}
-      readingTime={article.reading_time}
-      image={article.image}
-      content={article.content}
-    />
+    <>
+      <TopNav />
+      <ArticleLayout  
+        title={article.title}
+        description={article.description}
+        date={article.date}
+        author={article.author}
+        readingTime={article.reading_time}
+        image={article.image}
+        category={article.category}
+        content={article.content}
+      />
+     <BackButton/>
+    <ScrollToTopButton/>
+    <NavigationMenu/>
+    <Footer/>
+    </>
   );
 }
