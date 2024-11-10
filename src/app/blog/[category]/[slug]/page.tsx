@@ -7,6 +7,7 @@ import BackButton from '@/components/BackButton';
 import NavigationMenu from '@/components/NavigationMenu';
 import ScrollToTopButton from '@/components/ScrollToTopButton';
 import TopNav from '@/components/TopNav';
+import ArticleNavigation from '@/components/ArticleNavigation';
 
 interface ArticleData {
   title: string;
@@ -80,6 +81,7 @@ export default function ArticlePage() {
         category={article.category}
         content={article.content}
       />
+      <ArticleNavigation articles={articles} currentArticle={article}/>
      <BackButton/>
     <ScrollToTopButton/>
     <NavigationMenu/>

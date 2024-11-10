@@ -1,8 +1,33 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import { FaLinkedin, FaGithubSquare, FaPhoneSquare } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
+import Link from "next/link";
+
+interface ArticleData {
+  title: string;
+  slug: string;
+  category: string;
+}
 
 const Footer: React.FC = () => {
+  const [articles, setArticles] = useState<ArticleData[]>([]);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const response = await fetch(
+          "https://api.mockfly.dev/mocks/ef8e4ba5-5dc1-4b36-9bca-5f59afb45ebe/article"
+        );
+        const data = await response.json();
+        setArticles(data.articles.slice(0, 4)); // دریافت چهار مقاله اول
+      } catch (error) {
+        console.error("Error fetching articles:", error);
+      }
+    };
+    fetchArticles();
+  }, []);
+
   return (
     <footer className="bg-[#56464d] pt-20 pb-10 pr-10 pl-10 text-white">
       <div className="container mx-auto">
@@ -33,35 +58,31 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Contact Form Section */}
+          {/* Dynamic Articles Section */}
           <div className="w-full sm:w-1/3 px-4 mb-8 sm:mb-0">
-          <div>
+            <div>
               <h4 className="text-lg font-bold uppercase mb-6 border-b-2 pb-2">
                 مقالات من :   
               </h4>
               <ul className="space-y-2">
-                {[
-                  "HTML",
-                  "TAILWINDCSS",
-                  "CSS",
-                  "JAVASCRIPT",
-                  "TYPESCRIPT",
-                  "REACT",
-                  "REDUX",
-                  "NEXT",
-                  "PHP",
-                ].map((skill) => (
-                  <li key={skill} className="text-sm capitalize">
-                    {skill}
-                  </li>
-                ))}
+                {articles.length > 0 ? (
+                  articles.map((article) => (
+                    <li key={article.slug} className="text-sm capitalize">
+                      <Link className="hover:text-blue-400" href={`/blog/${article.category}/${article.slug}`}>
+                        {article.title}
+                      </Link>
+                    </li>
+                  ))
+                ) : (
+                  <li>در حال بارگذاری مقالات...</li>
+                )}
               </ul>
             </div>
           </div>
 
           {/* Social Media Links Section */}
           <div className="w-full sm:w-1/3 px-4">
-          <h4 className="text-lg font-bold uppercase mb-6 border-b-2 pb-2">
+            <h4 className="text-lg font-bold uppercase mb-6 border-b-2 pb-2">
               راههای ارتباطی با من : 
             </h4>
             <form action="#" className="mt-4">
