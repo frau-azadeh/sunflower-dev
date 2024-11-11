@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FaLinkedin, FaGithubSquare, FaPhoneSquare } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import Link from "next/link";
+import ContactForm from "./ContactForm"; // کامپوننت فرم جدید
 
 interface ArticleData {
   title: string;
@@ -20,7 +21,7 @@ const Footer: React.FC = () => {
           "https://api.mockfly.dev/mocks/ef8e4ba5-5dc1-4b36-9bca-5f59afb45ebe/article"
         );
         const data = await response.json();
-        setArticles(data.articles.slice(0, 4)); // دریافت چهار مقاله اول
+        setArticles(data.articles.slice(0, 4));
       } catch (error) {
         console.error("Error fetching articles:", error);
       }
@@ -80,24 +81,12 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Social Media Links Section */}
+          {/* Social Media Links and Contact Form */}
           <div className="w-full sm:w-1/3 px-4">
             <h4 className="text-lg font-bold uppercase mb-6 border-b-2 pb-2">
               راههای ارتباطی با من : 
             </h4>
-            <form action="#" className="mt-4">
-              <input
-                type="text"
-                placeholder="Enter Email Address"
-                className="w-full h-12 px-4 mb-4 text-gray-900 rounded-md focus:outline-none"
-              />
-              <button
-                type="button"
-                className="bg-green-800 text-white py-2 px-6 rounded-md"
-              >
-                ارسال
-              </button>
-            </form>
+            <ContactForm /> {/* استفاده از کامپوننت جدید فرم */}
             <div>
               <ul className="flex space-x-8 mt-6">
                 <li className="pl-8">
