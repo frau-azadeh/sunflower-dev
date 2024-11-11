@@ -7,8 +7,8 @@ import ScrollToTopButton from '../components/ScrollToTopButton';
 import { HiAcademicCap } from "react-icons/hi";
 import Footer from "../components/Footer";
 import NavigationMenu from "../components/NavigationMenu";
-
-
+import ArticleSlider from "../components/ArticleSlider";
+import { GrArticle } from "react-icons/gr";
 
 const page = () => {
  
@@ -122,6 +122,13 @@ const page = () => {
       </section>
       <ScrollToTopButton />
       <NavigationMenu />
+          <h2 className="font-bold text-4xl text-[#56544d] mx-auto text-center mt-14">مقالات جدید : </h2>
+          <div className="flex justify-center items-center">
+          <span className="before:block before:w-14 before:h-1 before:bg-[#56544d] mt-5"></span>
+             <GrArticle className='text-4xl text-[#56544d]  text-center mt-4 '/>
+          <span className="after:block after:w-14 after:h-1 after:bg-[#56544d] mt-5"></span>
+          </div>
+      <ArticleSlider />
       <Footer/>
     </div>
   )
