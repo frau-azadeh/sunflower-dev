@@ -1,14 +1,10 @@
-"use client"
-import ArticleLayout from '@/components/ArticleLayout';
-import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import Footer from '@/components/Footer';
-import BackButton from '@/components/BackButton';
-import NavigationMenu from '@/components/NavigationMenu';
-import ScrollToTopButton from '@/components/ScrollToTopButton';
-import TopNav from '@/components/TopNav';
-import ArticleNavigation from '@/components/ArticleNavigation';
-
+import { Metadata } from "next";
+import ArticleClient from "@/components/ArticleClient";
+import TopNav from "@/components/TopNav";
+import Footer from "@/components/Footer";
+import BackButton from "@/components/BackButton";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
+import NavigationMenu from "@/components/NavigationMenu";
 interface ArticleData {
   title: string;
   description: string;
@@ -21,71 +17,86 @@ interface ArticleData {
   slug: string;
 }
 
-export default function ArticlePage() {
-  const params = useParams();
-  const slug = params?.slug as string | undefined;
-  const category = params?.category as string | undefined;
+// تابع برای دریافت داده‌های مقاله
+async function fetchArticles(): Promise<ArticleData[]> {
+  const response = await fetch(
+    "https://api.mockfly.dev/mocks/ef8e4ba5-5dc1-4b36-9bca-5f59afb45ebe/article",
+    { cache: "no-store" }
+  );
+  const data = await response.json();
+  return Array.isArray(data.articles) ? data.articles : [];
+}
 
-  const [articles, setArticles] = useState<ArticleData[]>([]);
-  const [article, setArticle] = useState<ArticleData | null>(null);
-  const [loading, setLoading] = useState(true);
+// تابع برای تنظیم SEO و متا تگ‌ها
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string; slug: string };
+}): Promise<Metadata> {
+  const articles = await fetchArticles();
+  const article = articles.find(
+    (a) =>
+      a.category.toLowerCase() === params.category.toLowerCase() &&
+      a.slug === params.slug
+  );
 
-  useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        // دریافت تمام مقالات از API
-        const response = await fetch(
-          'https://api.mockfly.dev/mocks/ef8e4ba5-5dc1-4b36-9bca-5f59afb45ebe/article'
-        );
-        const data = await response.json();
+  return {
+    title: article ? `${article.title} - وبلاگ` : "مقاله - وبلاگ",
+    description: article
+      ? article.description
+      : "مقاله‌ای درباره برنامه‌نویسی و توسعه وب.",
+    openGraph: {
+      title: article ? `${article.title} - وبلاگ` : "مقاله - وبلاگ",
+      description: article
+        ? article.description
+        : "مقاله‌ای درباره برنامه‌نویسی و توسعه وب.",
+      url: `https://sunflower-dev.com/blog/${params.category}/${params.slug}`,
+      siteName: "وبلاگ برنامه نویسی",
+      images: [
+        {
+          url: article ? article.image : "/default-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: article ? article.title : "مقاله",
+        },
+      ],
+      locale: "fa_IR",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article ? `${article.title} - وبلاگ` : "مقاله - وبلاگ",
+      description: article
+        ? article.description
+        : "مقاله‌ای درباره برنامه‌نویسی و توسعه وب.",
+      images: [article ? article.image : "/default-image.jpg"],
+    },
+  };
+}
 
-        setArticles(data.articles); 
-      } catch (error) {
-        console.error("Error fetching articles:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchArticles();
-  }, []);
-
-  useEffect(() => {
-    if (category && slug && articles.length > 0) {
-      const foundArticle = articles.find(
-        (article) =>
-          article.category.toLowerCase() === category.toLowerCase() &&
-          article.slug === slug
-      );
-      setArticle(foundArticle || null);
-    }
-  }, [category, slug, articles]);
-
-  if (loading) {
-    return <div>در حال بارگذاری...</div>;
-  }
-
-  if (!article) {
-    return <div>...</div>;
-  }
+// صفحه اصلی مقاله
+export default async function ArticlePage({
+  params,
+}: {
+  params: { category: string; slug: string };
+}) {
+  const articles = await fetchArticles();
+  const article = articles.find(
+    (a) =>
+      a.category.toLowerCase() === params.category.toLowerCase() &&
+      a.slug === params.slug
+  );
 
   return (
     <>
       <TopNav />
-      <ArticleLayout  
-        title={article.title}
-        description={article.description}
-        date={article.date}
-        author={article.author}
-        readingTime={article.reading_time}
-        image={article.image}
-        category={article.category}
-        content={article.content}
-      />
-      <ArticleNavigation articles={articles} currentArticle={article}/>
-     <BackButton/>
-    <ScrollToTopButton/>
-    <NavigationMenu/>
-    <Footer/>
+      <div className="container mx-auto py-12">
+        <ArticleClient article={article|| null} articles={articles} />
+      </div>
+      <BackButton />
+      <ScrollToTopButton />
+      <NavigationMenu />
+      <Footer />
     </>
   );
 }

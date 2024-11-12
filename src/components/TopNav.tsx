@@ -9,7 +9,7 @@ interface Article {
   title: string;
 }
 
-const baseSiteUrl = "http://localhost:3000"; // تنظیم لینک پایه
+const baseSiteUrl = "http://localhost:3000"; // insert domain
 
 const TopNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -104,7 +104,7 @@ const TopNav = () => {
             </Link>
           </div>
 
-          {/* باکس جستجو */}
+          {/* search*/}
           <div className="relative flex-1 max-w-xs ml-4">
             <input
               type="text"
@@ -131,7 +131,7 @@ const TopNav = () => {
             </div>
           </div>
 
-          {/* دکمه منو برای حالت موبایل */}
+          {/* respansive for mobile*/}
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
@@ -165,7 +165,7 @@ const TopNav = () => {
         </div>
       </div>
 
-      {/* نمایش منوی موبایل */}
+      {/* show nav mobile*/}
       {isOpen && (
         <div className="md:hidden bg-[#ffe082] text-right px-4 py-2">
           <Link className="block text-[#56464d] px-3 py-2 text-lg font-medium hover:bg-[#56464d] hover:text-white" href={`${baseSiteUrl}`} passHref>

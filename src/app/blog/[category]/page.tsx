@@ -1,14 +1,10 @@
-// app/articles/[category]/page.tsx
-"use client"
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import ArticleCard from '@/components/ArticleCard';
-import Footer from '@/components/Footer';
-import BackButton from '@/components/BackButton';
-import NavigationMenu from '@/components/NavigationMenu';
-import ScrollToTopButton from '@/components/ScrollToTopButton';
-import TopNav from '@/components/TopNav';
-
+import { Metadata } from "next";
+import CategoryClient from "@/components/CategoryClient";
+import TopNav from "@/components/TopNav";
+import Footer from "@/components/Footer";
+import BackButton from "@/components/BackButton";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
+import NavigationMenu from "@/components/NavigationMenu";
 interface ArticleData {
   title: string;
   description: string;
@@ -18,64 +14,71 @@ interface ArticleData {
   category: string;
 }
 
-export default function CategoryPage() {
-  const { category } = useParams();
-  const [articles, setArticles] = useState<ArticleData[]>([]);
-  const [filteredArticles, setFilteredArticles] = useState<ArticleData[]>([]);
+async function fetchArticles(): Promise<ArticleData[]> {
+  const response = await fetch(
+    "https://api.mockfly.dev/mocks/ef8e4ba5-5dc1-4b36-9bca-5f59afb45ebe/article",
+    { cache: "no-store" }
+  );
+  const data = await response.json();
+  return Array.isArray(data.articles) ? data.articles : [];
+}
 
-  useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        const response = await fetch('https://api.mockfly.dev/mocks/ef8e4ba5-5dc1-4b36-9bca-5f59afb45ebe/article');
-        const data = await response.json();
-        setArticles(data.articles);
-      } catch (error) {
-        console.error("Error fetching articles:", error);
-      }
-    };
+// SEO
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string };
+}): Promise<Metadata> {
+  const category = params.category;
+  return {
+    title: `دسته‌بندی ${category} - وبلاگ`,
+    description: `مقالات دسته‌بندی ${category} در وبلاگ ما. با جدیدترین مقالات تخصصی در حوزه برنامه‌نویسی و توسعه وب آشنا شوید.`,
+    openGraph: {
+      title: `دسته‌بندی ${category} - وبلاگ`,
+      description: `مقالات دسته‌بندی ${category} در وبلاگ ما. با جدیدترین مقالات تخصصی در حوزه برنامه‌نویسی و توسعه وب آشنا شوید.`,
+      url: `https://sunflower-dev.com/blog/${category}`,
+      siteName: "وبلاگ برنامه نویسی",
+      images: [
+        {
+          url: "/images/react/what-is-the-react.jpeg",
+          width: 1200,
+          height: 630,
+          alt: `تصویری از دسته‌بندی ${category}`,
+        },
+      ],
+      locale: "fa_IR",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `دسته‌بندی ${category} - وبلاگ`,
+      description: `مقالات دسته‌بندی ${category} در وبلاگ ما. با جدیدترین مقالات تخصصی در حوزه برنامه‌نویسی و توسعه وب آشنا شوید.`,
+      images: ["/images/react/what-is-the-react.jpeg"],
+    },
+  };
+}
 
-    fetchArticles();
-  }, []);
-
-  useEffect(() => {
-    // تبدیل category به رشته در صورتی که آرایه باشد
-    const categoryString = Array.isArray(category) ? category[0] : category;
-
-    if (categoryString && articles.length > 0) {
-      const filtered = articles.filter(
-        (article) => article.category.toLowerCase() === categoryString.toLowerCase()
-      );
-      setFilteredArticles(filtered);
-    }
-  }, [category, articles]);
+export default async function CategoryPage({
+  params,
+}: {
+  params: { category: string };
+}) {
+  const articles = await fetchArticles();
+  const category = params.category;
 
   return (
     <>
-     <TopNav/>    
-    <div className="container mx-auto py-12 ">
-      <h1 className="text-2xl text-center mb-8  mt-20 text-[#56464d]">مقالات دسته‌بندی: {category}</h1>
-      <div className="flex flex-wrap justify-center gap-6 text-justify">
-        {filteredArticles.length > 0 ? (
-          filteredArticles.map((article) => (
-            <ArticleCard
-              key={article.slug}
-              title={article.title}
-              description={article.description}
-              date={article.date}
-              image={article.image}
-              href={`/blog/${article.category}/${article.slug}`}
-            />
-          ))
-        ) : (
-          <p className="text-center text-gray-600">...</p>
-        )}
+      <TopNav />
+      <div className="container mx-auto py-12">
+        <h1 className="text-2xl text-center mb-8 mt-20 text-[#56464d]">
+          مقالات دسته‌بندی: {category}
+        </h1>
+        <CategoryClient articles={articles} category={category} />
       </div>
-    </div>
-    <BackButton/>
-    <ScrollToTopButton/>
-    <NavigationMenu/>
-    <Footer/>
+      <BackButton />
+      <NavigationMenu />
+      <ScrollToTopButton />
+      <Footer />
     </>
-   
   );
 }

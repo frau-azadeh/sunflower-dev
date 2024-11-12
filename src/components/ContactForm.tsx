@@ -17,8 +17,8 @@ const ContactForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSuccess(""); // پاک کردن پیام موفقیت قبلی
-    setError(""); // پاک کردن پیام خطای قبلی
+    setSuccess(""); // delete previous massage
+    setError(""); // delete previous error
 
     const phoneRegex = /^09\d{9}$/;
 
@@ -27,7 +27,6 @@ const ContactForm: React.FC = () => {
       return;
     }
 
-    // اعتبارسنجی شماره تماس
     if (!phoneRegex.test(formData.phone)) {
       setError("شماره تماس باید با 09 شروع شود و 11 رقم باشد.");
       return;
@@ -35,7 +34,7 @@ const ContactForm: React.FC = () => {
 
     try {
       await axios.post("/api/contact", formData);
-      setSuccess("پیام شما با موفقیت ارسال شد."); // نمایش پیام موفقیت‌آمیز
+      setSuccess("پیام شما با موفقیت ارسال شد."); // ok
       setFormData({ name: "", phone: "", message: "" });
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -61,7 +60,7 @@ const ContactForm: React.FC = () => {
           placeholder="شماره تماس"
           value={formData.phone}
           onChange={handleChange}
-          className="w-full h-12 px-4 mb-4 text-gray-900 rounded-md focus:outline-none"
+          className="w-full h-12 px-4 mb-4 text-[#56464d] rounded-md focus:outline-none"
           required
         />
         <textarea
@@ -69,7 +68,7 @@ const ContactForm: React.FC = () => {
           placeholder="متن پیام"
           value={formData.message}
           onChange={handleChange}
-          className="w-full h-24 px-4 mb-4 text-gray-900 rounded-md focus:outline-none"
+          className="w-full h-24 px-4 mb-4 text-[#56464d] rounded-md focus:outline-none"
           required
         />
         {error && <p className="text-red-500 mb-4">{error}</p>}

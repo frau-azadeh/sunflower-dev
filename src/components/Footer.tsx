@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FaLinkedin, FaGithubSquare, FaPhoneSquare } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import Link from "next/link";
-import ContactForm from "./ContactForm"; // کامپوننت فرم جدید
+import ContactForm from "./ContactForm"; 
 
 interface ArticleData {
   title: string;

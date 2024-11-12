@@ -18,7 +18,7 @@ export default function ArticleCard({
   return (
     <div className="post-slide w-full max-w-xs p-4 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105">
       <div className="post-img">
-        <Image width={300} height={250} src={image} alt={title} className="rounded-md w-full h-48 object-cover" />
+        <Image width={400} height={350} src={image} alt={title} className="rounded-md w-full  object-contain" />
       </div>
       <div className="post-content mt-4">
         <h3 className="post-title text-lg text-[#56464d]">{title}</h3>

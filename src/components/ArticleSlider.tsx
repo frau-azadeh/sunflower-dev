@@ -17,7 +17,6 @@ interface Article {
     category:string;
 }
 
-// کامپوننت فلش قبلی با تایپ CustomArrowProps
 const PrevArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
     <button
         onClick={onClick}
@@ -27,7 +26,6 @@ const PrevArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
     </button>
 );
 
-// کامپوننت فلش بعدی با تایپ CustomArrowProps
 const NextArrow: React.FC<CustomArrowProps> = ({ onClick }) => (
     <button
         onClick={onClick}
@@ -69,8 +67,8 @@ const ArticleSlider: React.FC = () => {
         autoplay: true,
         autoplaySpeed: 3000,
         arrows: true,
-        prevArrow: <PrevArrow />, // استفاده از کامپوننت فلش قبلی
-        nextArrow: <NextArrow />, // استفاده از کامپوننت فلش بعدی
+        prevArrow: <PrevArrow />, 
+        nextArrow: <NextArrow />, 
         responsive: [
             {
                 breakpoint: 1024,
