@@ -24,7 +24,6 @@ export default function ArticlesClient({ articles }: ArticlesClientProps) {
     setCurrentPage(page);
   };
 
-  // محاسبه مقالاتی که باید نمایش داده شوند
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentArticles = articles.slice(startIndex, startIndex + itemsPerPage);
 
@@ -49,8 +48,6 @@ export default function ArticlesClient({ articles }: ArticlesClientProps) {
           <p className="text-center text-gray-600">به روز رسانی ... </p>
         )}
       </div>
-
-      {/* کامپوننت Pagination */}
       {articles.length > itemsPerPage && (
         <Pagination
           currentPage={currentPage}

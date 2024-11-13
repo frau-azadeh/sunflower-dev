@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import BackButton from "@/components/BackButton";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import NavigationMenu from "@/components/NavigationMenu";
+
 interface ArticleData {
   title: string;
   description: string;
@@ -17,7 +18,6 @@ interface ArticleData {
   slug: string;
 }
 
-// تابع برای دریافت داده‌های مقاله
 async function fetchArticles(): Promise<ArticleData[]> {
   const response = await fetch(
     "https://api.mockfly.dev/mocks/ef8e4ba5-5dc1-4b36-9bca-5f59afb45ebe/article",
@@ -27,7 +27,16 @@ async function fetchArticles(): Promise<ArticleData[]> {
   return Array.isArray(data.articles) ? data.articles : [];
 }
 
-// تابع برای تنظیم SEO و متا تگ‌ها
+// پیش‌دریافت پارامترها برای صفحات استاتیک
+export async function generateStaticParams() {
+  const articles = await fetchArticles();
+  return articles.map((article) => ({
+    category: article.category,
+    slug: article.slug,
+  }));
+}
+
+
 export async function generateMetadata({
   params,
 }: {
@@ -74,7 +83,7 @@ export async function generateMetadata({
   };
 }
 
-// صفحه اصلی مقاله
+
 export default async function ArticlePage({
   params,
 }: {
@@ -91,7 +100,7 @@ export default async function ArticlePage({
     <>
       <TopNav />
       <div className="container mx-auto py-12">
-        <ArticleClient article={article|| null} articles={articles} />
+        <ArticleClient article={article || null} articles={articles} />
       </div>
       <BackButton />
       <ScrollToTopButton />

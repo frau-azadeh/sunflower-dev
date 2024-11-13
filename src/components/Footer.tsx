@@ -86,7 +86,7 @@ const Footer: React.FC = () => {
             <h4 className="text-lg font-bold uppercase mb-6 border-b-2 pb-2">
               راههای ارتباطی با من : 
             </h4>
-            <ContactForm /> {/* استفاده از کامپوننت جدید فرم */}
+            <ContactForm /> 
             <div>
               <ul className="flex space-x-8 mt-6">
                 <li className="pl-8">
