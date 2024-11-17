@@ -9,7 +9,7 @@ interface Article {
   title: string;
 }
 
-const baseSiteUrl = "http://localhost:3000"; // insert domain
+const baseSiteUrl = "https://sunflower-dev.com"; // insert domain
 
 const TopNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -178,7 +178,7 @@ const TopNav = () => {
               مهارت‌های من
             
           </Link>
-          <Link   className="block text-[#56464d] px-3 py-2 text-lg font-medium hover:bg-[#56464d] hover:text-white" href="#contact" passHref scroll={false}>
+          <Link   className="block text-[#56464d] px-3 py-2 text-lg font-medium hover:bg-[#56464d] hover:text-white" href="/#contact" passHref scroll={false}>
               ارتباط با من
           </Link>
           <Link className="block text-[#56464d] px-3 py-2 text-lg font-medium hover:bg-[#56464d] hover:text-white" href={`${baseSiteUrl}/blog/`} passHref>
