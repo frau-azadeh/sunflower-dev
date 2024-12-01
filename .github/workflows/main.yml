@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repository
+      # Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -31,15 +31,14 @@ jobs:
       - name: Build application
         run: npm run build
 
-      # Verify build output (.next folder)
-      - name: Verify .next folder
+      # Verify .next directory
+      - name: Verify build output
         run: |
-          echo "Verifying .next folder..."
-          if [ -d ".next" ]; then
-            echo "Build successful. .next directory exists:"
-            ls -la .next
+          if [ -d ".next/output" ]; then
+            echo "Build successful. Contents of .next/output directory:"
+            ls -la .next/output
           else
-            echo "Error: .next directory not found!"
+            echo "Error: .next/output directory not found!"
             exit 1
           fi
 
@@ -48,20 +47,16 @@ jobs:
     needs: build
 
     steps:
-      # Checkout repository
+      # Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Setup SSH
-      - name: Setup SSH
+      # Deploy to server
+      - name: Deploy to server
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 5.144.131.250 >> ~/.ssh/known_hosts
-
-      # Deploy to server
-      - name: Deploy to server
-        run: |
-          rsync -avz ./.next/ sunflowe@5.144.131.250:~/project/.next
-          ssh -i ~/.ssh/id_rsa sunflowe@5.144.131.250 "echo Deployment completed!"
+          ssh -i ~/.ssh/id_rsa user@5.144.131.250 "echo Connected!"
+          rsync -avz .next/output/static/ user@5.144.131.250:/path/to/project
