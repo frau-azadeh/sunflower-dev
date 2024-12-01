@@ -62,7 +62,6 @@ const Slider = () => {
           alt={slides[currentIndex].title}
           width={800}
           height={600}
-          layout="respansive" 
           className="w-full  object-cover lg:h-screen md:h-72 "
         />
        

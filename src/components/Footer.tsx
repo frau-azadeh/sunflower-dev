@@ -132,7 +132,7 @@ const Footer: React.FC = () => {
         {/* Footer Copyright */}
         <div className="mt-12 text-center border-t border-white pt-8">
           <p className="text-sm">
-            AZADEH SHARIFI SOLTANI
+          🌻 azadeh sharifi soltani 🌻
           </p>
         </div>
       </div>

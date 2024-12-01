@@ -9,7 +9,7 @@ interface Article {
   title: string;
 }
 
-const baseSiteUrl = "https://sunflower-dev.com"; // insert domain
+const baseSiteUrl = "http://localhost:3000"; // insert domain
 
 const TopNav = () => {
   const [isOpen, setIsOpen] = useState(false);
