@@ -45,5 +45,5 @@ jobs:
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H your_server_ip >> ~/.ssh/known_hosts
-          rsync -avz ./build/ user@your_server_ip:/var/www/project
+          ssh-keyscan -H 5.144.131.250 >> ~/.ssh/known_hosts
+          rsync -avz ./build/ sunflowe@5.144.131.250:/var/www/project
