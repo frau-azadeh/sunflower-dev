@@ -52,19 +52,6 @@ A beautifully crafted website using the latest web technologies. Built with pass
 ### Open the app your browser
     http://localhost:3000
 
-
-## 📂 Project Structure
-
-sunflower-dev/
-├── components/      # Reusable UI components
-├── pages/           # Next.js pages
-├── styles/          # Tailwind CSS custom styles
-├── public/          # Static assets
-├── types/           # TypeScript types
-├── utils/           # Helper functions
-├── package.json     # Project dependencies
-└── README.md        # Project documentation
-
  ## 🤝 Contributing
 Contributions are welcome! To contribute:
 
