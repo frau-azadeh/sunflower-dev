@@ -13,28 +13,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout repository
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
+      # Install dependencies
       - name: Install dependencies
         run: npm install
 
+      # Build the application
       - name: Build application
         run: npm run build
 
-      - name: Check .next folder
+      # Verify build output (.next folder)
+      - name: Verify .next folder
         run: |
-          echo "Checking .next folder..."
-          if [ -d "./.next" ]; then
-            echo ".next folder exists. Listing contents:"
-            ls -la ./.next
+          echo "Verifying .next folder..."
+          if [ -d ".next" ]; then
+            echo "Build successful. .next directory exists:"
+            ls -la .next
           else
-            echo "Error: .next folder not found!"
+            echo "Error: .next directory not found!"
             exit 1
           fi
 
@@ -43,9 +48,11 @@ jobs:
     needs: build
 
     steps:
+      # Checkout repository
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Setup SSH
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
@@ -53,6 +60,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 5.144.131.250 >> ~/.ssh/known_hosts
 
+      # Deploy to server
       - name: Deploy to server
         run: |
           rsync -avz ./.next/ sunflowe@5.144.131.250:~/project/.next
