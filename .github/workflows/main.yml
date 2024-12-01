@@ -13,56 +13,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Clone the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         working-directory: ./sunflower
         run: npm install
 
-      # Step 4: Verify installed dependencies
-      - name: Check installed dependencies
-        working-directory: ./sunflower
-        run: npm ls --depth=0
-
-      # Step 5: Build application
       - name: Build application
         working-directory: ./sunflower
         run: npm run build
 
-      # Step 6: Check if .next folder is created
       - name: Check .next folder
         working-directory: ./sunflower
         run: ls -la .next
-
-      # Step 7: Check overall project structure
-      - name: Check project structure
-        working-directory: ./sunflower
-        run: ls -la
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
 
     steps:
-      # Step 1: Clone the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up SSH for deployment
-      - name: Deploy to server
+      - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 5.144.131.250 >> ~/.ssh/known_hosts
-          ssh -i ~/.ssh/id_rsa sunflowe@5.144.131.250 "mkdir -p ~/project/.next"
+
+      - name: Deploy to server
+        run: |
           rsync -avz ./sunflower/.next/ sunflowe@5.144.131.250:~/project/.next
+          ssh -i ~/.ssh/id_rsa sunflowe@5.144.131.250 "echo Deployment completed!"
