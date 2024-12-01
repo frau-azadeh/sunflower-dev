@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌻 Sunflower Website
 
-## Getting Started
+A beautifully crafted website using the latest web technologies. Built with passion, creativity, and modern tools, **Sunflower** is designed to deliver a seamless user experience.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **⚡ Next.js 14**: Leveraging the power of React with server-side rendering and API routes.
+- **🎨 Tailwind CSS**: For fast, responsive, and modern styling.
+- **🛠️ TypeScript**: Type-safe development for maintainable code.
+- **📡 Mockfly API**: Mock data service powering the dynamic content of the site.
+- **🌐 Vercel Deployment**: Deployed on Vercel for fast and reliable hosting.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔗 Live Demo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+👉 [Sunflower Website on Vercel](https://sunflower.vercel.app)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+| Technology    | Description                          |
+|---------------|--------------------------------------|
+| **Next.js**   | Framework for React                 |
+| **Tailwind**  | Utility-first CSS Framework         |
+| **TypeScript**| Static Typing for JavaScript        |
+| **Mockfly**   | API for mock data                   |
+| **Vercel**    | Hosting and deployment platform     |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📦 Installation
 
-## Deploy on Vercel
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/frau-azadeh/sunflower-dev.git
+   cd sunflower-dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Install dependencies
+    npm install
+    or
+    yarn install
+
+### Run the development server
+    npm run dev
+
+### Open the app your browser
+    http://localhost:3000
+
+
+## 📂 Project Structure
+
+sunflower-dev/
+├── components/      # Reusable UI components
+├── pages/           # Next.js pages
+├── styles/          # Tailwind CSS custom styles
+├── public/          # Static assets
+├── types/           # TypeScript types
+├── utils/           # Helper functions
+├── package.json     # Project dependencies
+└── README.md        # Project documentation
+
+ ## 🤝 Contributing
+Contributions are welcome! To contribute:
+
+Fork the repository.
+Create a new branch: git checkout -b feature/my-feature.
+Commit your changes: git commit -m "Add my feature".
+Push to the branch: git push origin feature/my-feature.
+Submit a pull request.
+
+👩🏻‍💻Author : Azadeh Sharifi Soltani
