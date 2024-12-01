@@ -39,7 +39,7 @@ A beautifully crafted website using the latest web technologies. Built with pass
    ```bash
    git clone https://github.com/frau-azadeh/sunflower-dev.git
    cd sunflower-dev
-<<<<<<< HEAD
+
 
 ### Install dependencies
     npm install
@@ -75,5 +75,3 @@ Push to the branch: git push origin feature/my-feature.
 Submit a pull request.
 
 👩🏻‍💻Author : Azadeh Sharifi Soltani
-=======
->>>>>>> b2ae611614c12330cb5eb823384450493286e6fe
