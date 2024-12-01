@@ -43,7 +43,9 @@ jobs:
      
       - name: Deploy to server
         run: |
+          mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 5.144.131.250 >> ~/.ssh/known_hosts
+          ssh -i ~/.ssh/id_rsa sunflowe@5.144.131.250 "echo Connected!"
           rsync -avz ./build/ sunflowe@5.144.131.250:/var/www/project
