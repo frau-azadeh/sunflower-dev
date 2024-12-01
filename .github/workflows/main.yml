@@ -27,13 +27,13 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Check .next folder
+      - name: Verify build output
         run: |
           if [ -d ".next" ]; then
-            echo "Build folder exists:"
+            echo "Build successful. Contents of .next directory:"
             ls -la .next
           else
-            echo "Error: .next folder not found!"
+            echo "Error: .next directory not found!"
             exit 1
           fi
 
