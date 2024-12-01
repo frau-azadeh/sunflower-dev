@@ -28,7 +28,14 @@ jobs:
         run: npm run build
 
       - name: Check .next folder
-        run: ls -la .next
+        run: |
+          if [ -d ".next" ]; then
+            echo "Build folder exists:"
+            ls -la .next
+          else
+            echo "Error: .next folder not found!"
+            exit 1
+          fi
 
   deploy:
     runs-on: ubuntu-latest
