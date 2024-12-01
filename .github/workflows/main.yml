@@ -27,8 +27,13 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Check build folder
-        run: ls -l ./build
+      
+      - name: Check project structure
+        run: ls -la
+
+     
+      - name: Check .next folder
+        run: ls -la .next
 
   deploy:
     runs-on: ubuntu-latest
@@ -44,5 +49,5 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 5.144.131.250 >> ~/.ssh/known_hosts
-          ssh -i ~/.ssh/id_rsa sunflowe@5.144.131.250 "mkdir -p ~/project"
-          rsync -avz --progress ./build/ sunflowe@5.144.131.250:~/project
+          ssh -i ~/.ssh/id_rsa sunflowe@5.144.131.250 "echo Connected!"
+          rsync -avz ./build/ sunflowe@5.144.131.250:~/project
