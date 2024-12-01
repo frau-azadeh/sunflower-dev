@@ -22,15 +22,12 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        working-directory: ./sunflower
         run: npm install
 
       - name: Build application
-        working-directory: ./sunflower
         run: npm run build
 
       - name: Check .next folder
-        working-directory: ./sunflower
         run: ls -la .next
 
   deploy:
@@ -50,5 +47,5 @@ jobs:
 
       - name: Deploy to server
         run: |
-          rsync -avz ./sunflower/.next/ sunflowe@5.144.131.250:~/project/.next
+          rsync -avz .next/ sunflowe@5.144.131.250:~/project/.next
           ssh -i ~/.ssh/id_rsa sunflowe@5.144.131.250 "echo Deployment completed!"
