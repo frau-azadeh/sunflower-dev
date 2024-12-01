@@ -27,13 +27,14 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Verify build output
+      - name: Check .next folder
         run: |
-          if [ -d ".next" ]; then
-            echo "Build successful. Contents of .next directory:"
-            ls -la .next
+          echo "Checking .next folder..."
+          if [ -d "./.next" ]; then
+            echo ".next folder exists. Listing contents:"
+            ls -la ./.next
           else
-            echo "Error: .next directory not found!"
+            echo "Error: .next folder not found!"
             exit 1
           fi
 
@@ -54,5 +55,5 @@ jobs:
 
       - name: Deploy to server
         run: |
-          rsync -avz .next/ sunflowe@5.144.131.250:~/project/.next
+          rsync -avz ./.next/ sunflowe@5.144.131.250:~/project/.next
           ssh -i ~/.ssh/id_rsa sunflowe@5.144.131.250 "echo Deployment completed!"
