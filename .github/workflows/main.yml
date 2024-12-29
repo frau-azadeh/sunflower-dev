@@ -1,0 +1,62 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Build the application
+      - name: Build application
+        run: npm run build
+
+      # Verify .next directory
+      - name: Verify build output
+        run: |
+          if [ -d ".next/output" ]; then
+            echo "Build successful. Contents of .next/output directory:"
+            ls -la .next/output
+          else
+            echo "Error: .next/output directory not found!"
+            exit 1
+          fi
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Deploy to server
+      - name: Deploy to server
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 5.144.131.250 >> ~/.ssh/known_hosts
+          ssh -i ~/.ssh/id_rsa user@5.144.131.250 "echo Connected!"
+          rsync -avz .next/output/static/ user@5.144.131.250:/path/to/project
