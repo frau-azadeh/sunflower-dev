@@ -25,10 +25,10 @@ const ArticleLayout: FC<ArticleLayoutProps> = ({
     <div className="bg-[#fff8e1] font-vazir min-h-screen">
       <div className="max-w-4xl mx-auto py-6 grid gap-8">
         {/* Poster Section */}
-        <div className="relative w-4/5 mx-auto rounded-lg overflow-hidden shadow-md mt-28 md:mt-32">
+        <div className="relative w-full mx-auto rounded-lg overflow-hidden shadow-md mt-28 md:mt-32">
           <Image src={image} alt={title} width={600} height={350} className="w-full  object-cover" />
           <div className="absolute bottom-10 right-10 w-3/5  bg-white/20 rounded-lg backdrop-blur-md p-6 border border-white/30 shadow-lg">
-            <h1 className="text-xl text-[#ffe082] font-light mb-2 md:text-4xl">{title}</h1>
+            <h1 className="text-xl text-[#ffe082] mb-2 md:text-4xl">{title}</h1>
             <div className="w-full h-px bg-[#ffe082]"></div>
           </div>
         </div>
