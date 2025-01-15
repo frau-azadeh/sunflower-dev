@@ -61,4 +61,4 @@ Commit your changes: git commit -m "Add my feature".
 Push to the branch: git push origin feature/my-feature.
 Submit a pull request.
 
-👩🏻‍💻Author : Azadeh Sharifi Soltani
+Author : Azadeh Sharifi Soltani
