@@ -1,5 +1,0 @@
-{
-  "/page": "app/page.js",
-  "/blog/page": "app/blog/page.js",
-  "/blog/[category]/[slug]/page": "app/blog/[category]/[slug]/page.js"
-}
